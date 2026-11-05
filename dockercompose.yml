@@ -1,0 +1,34 @@
+services:
+  punto_a:
+    image: locustio/locust:2.32.4
+    container_name: locust_test
+    volumes:
+      - ./locustfile.py:/mnt/locust/locustfile.py:ro
+    ports:
+      - "8089:8089"
+    command: -f /mnt/locust/locustfile.py --host=https://fakestoreapi.com --web-host=0.0.0.0
+
+  punto_b:
+    build:
+      context: ./node_app
+      dockerfile: dockerfile
+    container_name: par_impar_node
+    ports:
+      - "3000:3000"
+
+  punto_c:
+    image: php:8.3-apache
+    container_name: punto3_php
+    volumes:
+      - ./punto3:/var/www/html:ro
+    ports:
+      - "8080:80"
+
+  punto_d:
+    build:
+      context: ./punto5
+      dockerfile: dockerfile
+    container_name: par_impar_flask
+    ports:
+      - "5000:5000"
+

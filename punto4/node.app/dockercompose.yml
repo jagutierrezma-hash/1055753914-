@@ -1,0 +1,8 @@
+services:
+  ping_test:
+    image: python: lastest
+    container_name: punto4_ping_test
+    command:
+      - sh
+      - -c
+      - apt-get update && apt-get install -y --no-install-recommends iputils-ping && rm -rf /var/lib/apt/lists/* && tail -f /dev/null
