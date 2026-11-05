@@ -1,0 +1,5 @@
+FROM node: lastest
+WORKDIR /app
+COPY node.js ./node.js
+EXPOSE 3000
+CMD ["node", "node.js"]
